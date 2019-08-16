@@ -88,7 +88,7 @@ router.post("/tasks", (req, res) => {
 });
 
 router.get("/projects/:id", (req, res) => {
-    const id = req.params.id
+  const id = req.params.id;
   helperFunctions
     .getProjectById(id)
     .then(masterPlan => {

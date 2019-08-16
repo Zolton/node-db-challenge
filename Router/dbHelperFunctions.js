@@ -49,11 +49,13 @@ function addTask (newTask) {
 function getProjectById (id) {
     return db("projects")
     .join("quantity", "projects.id", "=", "quantity.project_id")
-    .join("resources", "resources.id", "=", "quantity.resource_id")
-    .where({project_id: id})
-    //.join("task", "task.project_id", "=", "projects.id")
+    .where("quantity.project_id", "=", id)
+    .join("task", "task.project_id", "=", "projects.id")
+    .where("task.project_id", "=", id)
+    //.join("resources", "resources.id", "=", "quantity.resource_id")
     
-    //.select("projectName", "projectDescription", "resourceName", "description", "ToDo", "Notes")
+    
+   .select("projectName", "projectDescription", "ToDo", "Notes")
     
 
     
