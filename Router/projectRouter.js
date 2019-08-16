@@ -87,4 +87,16 @@ router.post("/tasks", (req, res) => {
     });
 });
 
+router.get("/projects/:id", (req, res) => {
+    const id = req.params.id
+  helperFunctions
+    .getProjectById(id)
+    .then(masterPlan => {
+      res.status(200).json(masterPlan);
+    })
+    .catch(error => {
+      res.status(500).json({ Error: "Server status: 500" });
+    });
+});
+
 module.exports = router;

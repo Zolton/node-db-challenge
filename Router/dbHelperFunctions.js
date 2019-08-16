@@ -6,7 +6,8 @@ module.exports = {
   getTaskList,
   addResources,
   addProject,
-  addTask
+  addTask,
+  getProjectById
 };
 
 function getProjectList() {
@@ -37,4 +38,23 @@ function addProject(newProject) {
 
 function addTask (newTask) {
     return db("task").insert(newTask)
+}
+
+// SELECT projects.projectName, projects.projectDescription, projects.Completed, task.id, task.ToDo, task.Notes, task.Completed, resources.id, resources.resourceName, resources.resourceName
+// FROM projects
+// inner JOIN quantity on projects.id = quantity.project_id
+// INNER JOIN resources on quantity.resource_id = resources.id
+// inner JOIN task ON projects.id = task.project_id
+
+function getProjectById (id) {
+    return db("projects")
+    .join("quantity", "projects.id", "=", "quantity.project_id")
+    .join("resources", "resources.id", "=", "quantity.resource_id")
+    .where({project_id: id})
+    //.join("task", "task.project_id", "=", "projects.id")
+    
+    //.select("projectName", "projectDescription", "resourceName", "description", "ToDo", "Notes")
+    
+
+    
 }
